@@ -6,6 +6,7 @@
 import ActorRepository from "../actor/repositories/actorRepository";
 import Actor from "../actor/entities/actor";
 import mysql from "mysql";
+import ActorDTO from "../actor/entities/actorDTO";
 
 let connection = mysql.createConnection({
     host     : 'localhost',
@@ -15,16 +16,17 @@ let connection = mysql.createConnection({
 });
 connection.connect();
 
+//Actividad 3
 export default class ActorSql implements ActorRepository{
-    data2tables(): Promise<Actor[]> {
-        return new Promise<Actor[]>((resolve,reject)=>{
+    getActorsDTO(): Promise<ActorDTO[]> {
+        return new Promise<ActorDTO[]>((resolve,reject)=>{
             connection.query(`SELECT * FROM actors INNER JOIN idioma ON actors.idIdioma=idioma.id`, function(error: any, results){
                 if(error){
                     reject(false);
                     console.log(error)
                 }
                 console.log(results)
-                let actors:Actor[]=[];
+                let actors:ActorDTO[]=[];
                 results.forEach((actor:any)=>{
                     console.log(actor);
                     actors.push({
@@ -40,17 +42,9 @@ export default class ActorSql implements ActorRepository{
             });
         });
     }
-     addActor(id: Number, name: String, lastname: String, characterAc: String, language: String): Promise<boolean> {
+     addActor(id: Number, name: String, lastname: String, characterAc: String, idIdioma: Number): Promise<boolean> {
         return new Promise<boolean>((resolve, reject)=>{
-            connection.query('INSERT INTO idioma VALUES (?,?);',[id,language], function (error){
-                if (error){
-                    reject(false)
-                    console.log(error)
-                }else{
-                    resolve(true)
-                }
-            });
-            connection.query('INSERT INTO actors VALUES (?,?,?,?,?);',[id, name, lastname, characterAc,id], function (error){
+            connection.query('INSERT INTO actors VALUES (?,?,?,?,?);',[id, name, lastname, characterAc,idIdioma], function (error){
                 if (error){
                     reject(false)
                     console.log(error)
@@ -84,14 +78,14 @@ export default class ActorSql implements ActorRepository{
                     name:results[0].name,
                     lastName:results[0].lastname,
                     character:results[0].characterAc,
-                    language:results[0].language
+                    idILang:results[0].idIdioma
                 });
             });
         });
     }
     getActors(): Promise<Actor[]> {
         return new Promise<Actor[]>((resolve,reject)=>{
-            connection.query(`SELECT * FROM actors INNER JOIN idioma ON actors.idIdioma=idioma.id`, function(error: any, results){
+            connection.query(`SELECT * FROM actors`, function(error: any, results){
                 if(error){
                     reject(false);
                     console.log(error)
@@ -104,7 +98,7 @@ export default class ActorSql implements ActorRepository{
                         name:actor.name,
                         lastName:actor.lastname,
                         character:actor.characterAc,
-                        language:actor.language
+                        idILang:actor.idIdioma
                     });
                 });
                 resolve(actors);

@@ -4,10 +4,10 @@
  * @author ernesto
  */
 
-export default interface Actor{
+export default interface ActorDTO{
     id:Number;
     name:String;
     lastName:String;
     character:String;
-    idILang:Number;
+    language:String
 }

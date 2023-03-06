@@ -15,8 +15,9 @@ let connection = mysql_1.default.createConnection({
     database: 'actors'
 });
 connection.connect();
+//Actividad 3
 class ActorSql {
-    data2tables() {
+    getActorsDTO() {
         return new Promise((resolve, reject) => {
             connection.query(`SELECT * FROM actors INNER JOIN idioma ON actors.idIdioma=idioma.id`, function (error, results) {
                 if (error) {
@@ -39,18 +40,36 @@ class ActorSql {
             });
         });
     }
-    addActor(id, name, lastname, characterAc, language) {
-        return new Promise((resolve, reject) => {
-            connection.query('INSERT INTO idioma VALUES (?,?);', [id, language], function (error) {
-                if (error) {
+    data2tables() {
+        throw new Error("Method not implemented.");
+    }
+    /*data2tables(): Promise<Actor[]> {
+        return new Promise<Actor[]>((resolve,reject)=>{
+            connection.query(`SELECT * FROM actors INNER JOIN idioma ON actors.idIdioma=idioma.id`, function(error: any, results){
+                if(error){
                     reject(false);
-                    console.log(error);
+                    console.log(error)
                 }
-                else {
-                    resolve(true);
-                }
+                console.log(results)
+                let actors:Actor[]=[];
+                results.forEach((actor:any)=>{
+                    console.log(actor);
+                    actors.push({
+                        id:actor.id,
+                        name:actor.name,
+                        lastName:actor.lastname,
+                        character:actor.characterAc,
+                        language:actor.idIdioma
+                    });
+                });
+                resolve(actors);
+                
             });
-            connection.query('INSERT INTO actors VALUES (?,?,?,?,?);', [id, name, lastname, characterAc, id], function (error) {
+        });
+    }*/
+    addActor(id, name, lastname, characterAc, idIdioma) {
+        return new Promise((resolve, reject) => {
+            connection.query('INSERT INTO actors VALUES (?,?,?,?,?);', [id, name, lastname, characterAc, idIdioma], function (error) {
                 if (error) {
                     reject(false);
                     console.log(error);
@@ -86,14 +105,14 @@ class ActorSql {
                     name: results[0].name,
                     lastName: results[0].lastname,
                     character: results[0].characterAc,
-                    language: results[0].language
+                    idILang: results[0].idIdioma
                 });
             });
         });
     }
     getActors() {
         return new Promise((resolve, reject) => {
-            connection.query(`SELECT * FROM actors INNER JOIN idioma ON actors.idIdioma=idioma.id`, function (error, results) {
+            connection.query(`SELECT * FROM actors`, function (error, results) {
                 if (error) {
                     reject(false);
                     console.log(error);
@@ -106,7 +125,7 @@ class ActorSql {
                         name: actor.name,
                         lastName: actor.lastname,
                         character: actor.characterAc,
-                        language: actor.language
+                        idILang: actor.idIdioma
                     });
                 });
                 resolve(actors);

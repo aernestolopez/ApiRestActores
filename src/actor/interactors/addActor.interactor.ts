@@ -3,7 +3,7 @@
  * @author ernesto
  */
 import ActorRepository from "../repositories/actorRepository"
-const addActorInteractor = (ActorRepository: ActorRepository)=> (ActorId: Number, ActorName:String,ActorLastName:String, ActorCharacter:String, ActorLanguage:String):Promise<boolean> => {
-    return ActorRepository.addActor(ActorId, ActorName, ActorLastName, ActorCharacter, ActorLanguage);
+const addActorInteractor = (ActorRepository: ActorRepository)=> (ActorId: Number, ActorName:String,ActorLastName:String, ActorCharacter:String, ActorIdLang:Number):Promise<boolean> => {
+    return ActorRepository.addActor(ActorId, ActorName, ActorLastName, ActorCharacter, ActorIdLang);
 }
 export default addActorInteractor

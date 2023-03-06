@@ -14,4 +14,5 @@ route.delete('/deleteActor', actorHttp_controller_1.deleteActorHttp);
 route.put('/updateActor', actorHttp_controller_1.updateActorHttp);
 route.get('/getActor/:id', actorHttp_controller_1.getActorHttp);
 route.get('/getActors', actorHttp_controller_1.getActorsHttp);
+route.get('/getActorsDTO', actorHttp_controller_1.getActorsDTOHTTP);
 exports.default = route;
