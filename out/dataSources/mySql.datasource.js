@@ -27,7 +27,6 @@ class ActorSql {
                 console.log(results);
                 let actors = [];
                 results.forEach((actor) => {
-                    console.log(actor);
                     actors.push({
                         id: actor.id,
                         name: actor.name,
@@ -40,33 +39,6 @@ class ActorSql {
             });
         });
     }
-    data2tables() {
-        throw new Error("Method not implemented.");
-    }
-    /*data2tables(): Promise<Actor[]> {
-        return new Promise<Actor[]>((resolve,reject)=>{
-            connection.query(`SELECT * FROM actors INNER JOIN idioma ON actors.idIdioma=idioma.id`, function(error: any, results){
-                if(error){
-                    reject(false);
-                    console.log(error)
-                }
-                console.log(results)
-                let actors:Actor[]=[];
-                results.forEach((actor:any)=>{
-                    console.log(actor);
-                    actors.push({
-                        id:actor.id,
-                        name:actor.name,
-                        lastName:actor.lastname,
-                        character:actor.characterAc,
-                        language:actor.idIdioma
-                    });
-                });
-                resolve(actors);
-                
-            });
-        });
-    }*/
     addActor(id, name, lastname, characterAc, idIdioma) {
         return new Promise((resolve, reject) => {
             connection.query('INSERT INTO actors VALUES (?,?,?,?,?);', [id, name, lastname, characterAc, idIdioma], function (error) {
@@ -119,7 +91,6 @@ class ActorSql {
                 }
                 let actors = [];
                 results.forEach((actor) => {
-                    console.log(actor);
                     actors.push({
                         id: actor.id,
                         name: actor.name,

@@ -28,7 +28,6 @@ export default class ActorSql implements ActorRepository{
                 console.log(results)
                 let actors:ActorDTO[]=[];
                 results.forEach((actor:any)=>{
-                    console.log(actor);
                     actors.push({
                         id:actor.id,
                         name:actor.name,
@@ -92,7 +91,6 @@ export default class ActorSql implements ActorRepository{
                 }
                 let actors:Actor[]=[];
                 results.forEach((actor:any)=>{
-                    console.log(actor);
                     actors.push({
                         id:actor.id,
                         name:actor.name,
