@@ -1,7 +1,6 @@
 {
   "name": "apirestactores",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "tsc && node out/express/server/index.js",
@@ -18,11 +17,21 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "@types/passport": "^1.0.12",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "mysql": "^2.18.1",
     "passport": "^0.6.0",
     "passport-google-oauth": "^2.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aernestolopez/ApiRestActores.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aernestolopez/ApiRestActores/issues"
+  },
+  "homepage": "https://github.com/aernestolopez/ApiRestActores#readme",
+  "description": ""
 }

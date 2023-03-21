@@ -13,7 +13,6 @@ const express_session_1 = __importDefault(require("express-session"));
 const app = (0, express_1.default)();
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
-app.use(route_1.default);
 app.set('view engine', 'ejs');
 app.use((0, express_session_1.default)({
     resave: false,
@@ -39,7 +38,6 @@ passport.serializeUser(function (user, cb) {
 passport.deserializeUser(function (obj, cb) {
     cb(null, obj);
 });
-/*  Google AUTH  */
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const GOOGLE_CLIENT_ID = '310325753062-7p4dmf74goa9vg2i073b3kgi63i121oh.apps.googleusercontent.com';
 const GOOGLE_CLIENT_SECRET = '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';
@@ -53,6 +51,6 @@ passport.use(new GoogleStrategy({
 }));
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/error' }), function (req, res) {
-    // Successful authentication, redirect success.
+    app.use(route_1.default);
     res.redirect('/success');
 });

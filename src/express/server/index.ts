@@ -8,7 +8,6 @@ import session from "express-session";
 const app=express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(route);
 app.set('view engine', 'ejs');
 
 app.use(session({
@@ -65,6 +64,6 @@ app.get('/auth/google',
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/error' }),
   function(req, res) {
- 
+    app.use(route)
     res.redirect('/success');
   });
