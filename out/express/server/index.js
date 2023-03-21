@@ -51,6 +51,7 @@ passport.use(new GoogleStrategy({
 }));
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/error' }), function (req, res) {
+    //Cuando el usuario este autenticado y autorizado podra hacer llamadas a las rutas
     app.use(route_1.default);
     res.redirect('/success');
 });

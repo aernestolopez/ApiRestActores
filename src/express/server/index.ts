@@ -64,6 +64,7 @@ app.get('/auth/google',
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/error' }),
   function(req, res) {
+    //Cuando el usuario este autenticado y autorizado podra hacer llamadas a las rutas
     app.use(route)
     res.redirect('/success');
   });
